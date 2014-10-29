@@ -10,6 +10,7 @@ public class JGallery {
 			Explorer dir = new Explorer(args[0]);
 			Template T = new Template(dir.getImages());
 			T.export();
+			System.out.println("Open gallery.html to see your gallery.");
 		}
 	}
 
