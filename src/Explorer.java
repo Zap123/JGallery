@@ -1,31 +1,35 @@
 import java.io.File; 
-import java.io.FileNotFoundException;
+import java.nio.file.NotDirectoryException;
 import java.util.ArrayList;
 
 public class Explorer {
 	private ArrayList<String> images;
-	private String path;
+	public String path;
 	private File imgDir;
 	
 	public Explorer(String path){
 		this.path = path;
+		imgDir = new File(path);
 		images = new ArrayList<String>();
 		try {
 			getImagesPaths();
-		} catch (FileNotFoundException e) {
+		} catch (NotDirectoryException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void getImagesPaths() throws FileNotFoundException{
-		imgDir = new File(path);
-		if (imgDir.exists()){
+	public void genThumnails(){
+		
+	}
+	
+	public void getImagesPaths() throws NotDirectoryException{
+		if (imgDir.isDirectory()){
 			for(File img : imgDir.listFiles(new ImagesFilter())){
-				images.add(img.toString());
+				images.add(img.getName());
 			}
 		}
 		else{
-			throw(new FileNotFoundException());
+			throw(new NotDirectoryException(path));
 		}
 	}
 

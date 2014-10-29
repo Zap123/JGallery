@@ -19,20 +19,21 @@ public class Template {
 	
 	private void genImages(){
 		for(String img: paths){
-			HTMLImages += "<a target=blank href='file://"+img+"'"
-					   + "<div class='imgdiv tilt'><img src='file://"+img+"'class='img'></img></div></a>";
+			HTMLImages += "<a target=blank href='"+img+"'"
+					   + "<div class='imgdiv tilt'><img src='"+img+"'class='img'></img></div></a>";
 		}
 	}
 
 	
-	public void export(){
+	public void export(String dir){
 		try {
 			genImages();
 		    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-		    						new FileOutputStream("gallery.html"), "utf-8"));
+		    						new FileOutputStream(Paths.get(dir,"index.html").toString()), "utf-8"));
 		    
 			writer.write(new String(Files.readAllBytes(Paths.get("src/theme/basic.html"))));
-		    writer.append(HTMLImages);
+		    writer.write(HTMLImages);
+			writer.write(new String(Files.readAllBytes(Paths.get("src/theme/style.html"))));
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();

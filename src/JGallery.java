@@ -9,8 +9,8 @@ public class JGallery {
 		else{
 			Explorer dir = new Explorer(args[0]);
 			Template T = new Template(dir.getImages());
-			T.export();
-			System.out.println("Open gallery.html to see your gallery.");
+			T.export(dir.path);
+			System.out.println("Open index.html to see your gallery.");
 		}
 	}
 
