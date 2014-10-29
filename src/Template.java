@@ -19,7 +19,8 @@ public class Template {
 	
 	private void genImages(){
 		for(String img: paths){
-			HTMLImages += "<div class='imgdiv tilt'><img src='file://"+img+"'class='img'></img></div>";
+			HTMLImages += "<a target=blank href='file://"+img+"'"
+					   + "<div class='imgdiv tilt'><img src='file://"+img+"'class='img'></img></div></a>";
 		}
 	}
 
