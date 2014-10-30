@@ -1,10 +1,7 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -26,18 +23,23 @@ public class Template {
         }
     }
 
+    public static String convertStreamToString(java.io.InputStream is) {
+        try (java.util.Scanner s = new java.util.Scanner(is)) {
+            return s.useDelimiter("\\A").hasNext() ? s.next() : "";
+        }
+    }
+
     public void export(String dir) {
         try {
             genImages();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(Paths.get(dir, "myphotogallery.html")
                             .toString()), "utf-8"));
-
-            writer.write(new String(Files.readAllBytes(Paths
-                    .get("src/theme/basic.html"))));
+            writer.write(convertStreamToString(getClass().getResourceAsStream(
+                    "theme/basic.html")));
             writer.write(HTMLImages);
-            writer.write(new String(Files.readAllBytes(Paths
-                    .get("src/theme/style.html"))));
+            writer.write(convertStreamToString(getClass().getResourceAsStream(
+                    "theme/style.html")));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
