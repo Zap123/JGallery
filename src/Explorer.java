@@ -39,8 +39,11 @@ public class Explorer {
         try {
             if (imgpath.getName().toLowerCase().endsWith(".gif"))
                 ImageIO.write(scaledImage, "gif", thumbnail);
+            if (imgpath.getName().toLowerCase().endsWith(".png"))
+                ImageIO.write(scaledImage, "png", thumbnail);
             else
                 ImageIO.write(scaledImage, "jpg", thumbnail);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
