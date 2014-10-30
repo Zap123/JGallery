@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.NotDirectoryException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-
 import org.imgscalr.Scalr;
 
 import com.miginfocom.base64.Base64;
@@ -39,7 +37,10 @@ public class Explorer {
         BufferedImage scaledImage = Scalr.resize(img, 200);
         ByteArrayOutputStream thumbnail = new ByteArrayOutputStream();
         try {
-            ImageIO.write(scaledImage, "jpg", thumbnail);
+            if (imgpath.getName().toLowerCase().endsWith(".gif"))
+                ImageIO.write(scaledImage, "gif", thumbnail);
+            else
+                ImageIO.write(scaledImage, "jpg", thumbnail);
         } catch (IOException e) {
             e.printStackTrace();
         }
