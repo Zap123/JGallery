@@ -1,11 +1,11 @@
 JGallery
 ========
 
-A Class to visualize an image gallery of a folder
+A Class to visualize an image gallery of a folder in HTML/CSS
 
 ![Screenshot](demo.png)
 
 **Usage**:  
->java JGallery path/to/a/directory
+>JGallery path/to/a/directory
 
-then open the file gallery.html in a browser.
+then open the file myphotogallery.html inside the directory in a browser.

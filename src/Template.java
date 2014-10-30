@@ -8,32 +8,36 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
 public class Template {
-    ArrayList<String> paths; 
+    ArrayList<String> image;
+    ArrayList<String> thumb;
     String HTMLImages = "";
-    
-    public Template(ArrayList<String> Images){
-        this.paths = Images;
+
+    public Template(ArrayList<String> Images, ArrayList<String> thumbnails) {
+        this.image = Images;
+        this.thumb = thumbnails;
     }
-    
-    private void genImages(){
-        for(String img: paths){
-            HTMLImages += "<a target=blank href='"+img+"'"
-                       + "<div class='imgdiv tilt'><img src='"+img+"'class='img'></img></div></a>";
+
+    private void genImages() {
+        for (int i = 0; i < image.size(); i++) {
+            HTMLImages += "<a target=blank href='" + image.get(i) + "'"
+                    + "<div class='imgdiv tilt'><img src='" + thumb.get(i)
+                    + "'class='img'></img></div></a>";
         }
     }
 
-    
-    public void export(String dir){
+    public void export(String dir) {
         try {
             genImages();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                                    new FileOutputStream(Paths.get(dir,"index.html").toString()), "utf-8"));
-            
-            writer.write(new String(Files.readAllBytes(Paths.get("src/theme/basic.html"))));
+                    new FileOutputStream(Paths.get(dir, "myphotogallery.html")
+                            .toString()), "utf-8"));
+
+            writer.write(new String(Files.readAllBytes(Paths
+                    .get("src/theme/basic.html"))));
             writer.write(HTMLImages);
-            writer.write(new String(Files.readAllBytes(Paths.get("src/theme/style.html"))));
+            writer.write(new String(Files.readAllBytes(Paths
+                    .get("src/theme/style.html"))));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
