@@ -1,7 +1,7 @@
 JGallery
 ========
 
-A Class to visualize an image gallery of a folder in HTML/CSS
+An application to generate an image gallery of a folder in HTML/CSS
 
 ![Screenshot](demo.png)
 
